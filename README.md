@@ -31,7 +31,7 @@ Make sure you have [Node.js](https://nodejs.org/) (version 18.17 or higher) inst
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/ingredientlens.git
+git clone https://github.com/ridwannp/ingredientlens.git
 cd ingredientlens
 ```
 
