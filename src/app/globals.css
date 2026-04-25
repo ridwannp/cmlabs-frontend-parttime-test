@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Spicy Red & Brown Palette */
+  --color-base: #570E1A; /* Deep Wine Red Base */
+  --color-surface: #7A1425; /* Lighter Red Surface */
+  --color-card: #4A0C16; /* Deep Brownish Red / Coklat */
+  --color-card-hover: #752222;
+  --color-border: #E65100; /* Orange Border */
+  --color-border-hover: #FFB300; /* Yellow Border Hover */
+
+  /* Accent: Yellow & Orange */
+  --color-accent: #FFB300; /* Yellow */
+  --color-accent-light: #FF9800; /* Orange */
+  --color-accent-dim: rgba(255, 179, 0, 0.15);
+
+  /* Text: Light warm tones for readability on red/brown */
+  --color-text-primary: #FFF9C4; /* Light Yellow / Cream */
+  --color-text-secondary: #FFE0B2; /* Light Orange */
+  --color-text-muted: #D7CCC8; /* Light Brown */
+
+  /* Fonts */
+  --font-display: var(--font-cormorant), 'Georgia', serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── Reset & Base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-overflow-scrolling: touch;
 }
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-base);
+}
+
+/* ─── Custom Scrollbar ─────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--color-base); }
+::-webkit-scrollbar-thumb { background: var(--color-border-hover); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ─── Shimmer Loading ──────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-card) 25%,
+    var(--color-card-hover) 50%,
+    var(--color-card) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ─── Bounce Arrow ─────────────────────────────── */
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.bounce-arrow { animation: bounce-arrow 1.4s ease-in-out infinite; }
+
+/* ─── Discover Scroll Snapping ─────────────────── */
+.discover-feed {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.discover-slide {
+  height: 100dvh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Typography ───────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-sans { font-family: var(--font-sans); }
